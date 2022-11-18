@@ -6,7 +6,10 @@
 		insert into member
 		values(#{member_id},#{password},#{member_name},#{phone},#{grade},#{card},#{flag})
 	</insert>
-	<select id="login" parameterType="hashmap" resultType="hashmap">
-	select * from member where member_id = #{member_id} and password = #{password}
+	
+	<select id="login" parameterType="hashMap" resultType="hashMap">
+	 select * from member 
+	 where member_id = #{member_id}
+	 and password = #{password}
 	</select>
 </mapper>

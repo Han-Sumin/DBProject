@@ -6,5 +6,8 @@
 	<typeAliases>
 		<typeAlias alias="MemberVO"
 			type="com.rail.reserve.vo.MemberVO" />
+		<typeAlias alias="ReserveVO"
+			type="com.rail.reserve.vo.ReserveVO" />
 	</typeAliases>
+
 </configuration>

@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Repository
 public class MemberDao {
 
@@ -19,7 +21,10 @@ public class MemberDao {
 
 	public Map<String, Object> loginCheck(Map<String, Object> map) {
 		return sqltemplate.selectOne("member.login", map);
+	}
 
+	public Map<String, Object> logout(HttpSession session) {
+		return sqltemplate.selectOne("member.logout", session);
 	}
 
 }
