@@ -12,4 +12,29 @@
 	 where member_id = #{member_id}
 	 and password = #{password}
 	</select>
+	
+	<select id="lists" parameterType="hashMap" resultType="hashMap">
+	select * from member
+	</select>
+	
+	<update id="gradeUpdate">
+	update member set grade =
+		#{grade} where member_id = #{member_id}
+	</update>
+	
+	<select id="trainlists" parameterType="hashMap" resultType="hashMap">
+	select * from train
+	</select>
+	
+	<insert id="addtrain" parameterType="hashMap">
+	insert into train
+	values(#{train_id},#{train_name})
+	</insert>
+	<select id="schedulelists" parameterType="hashMap" resultType="hashMap">
+	select * from schedule
+	</select>
+	<insert id="addSchedule">
+	insert into schedule
+	values(#{station_id},#{train_id},#{direction})
+	</insert>
 </mapper>

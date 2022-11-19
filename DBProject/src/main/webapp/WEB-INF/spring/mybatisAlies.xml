@@ -8,6 +8,11 @@
 			type="com.rail.reserve.vo.MemberVO" />
 		<typeAlias alias="ReserveVO"
 			type="com.rail.reserve.vo.ReserveVO" />
+		<typeAlias alias="TrainVO"
+			type="com.rail.reserve.vo.TrainVO" />
+		<typeAlias alias="ScheduleVO"
+			type="com.rail.reserve.vo.ScheduleVO" />
+
 	</typeAliases>
 
 </configuration>

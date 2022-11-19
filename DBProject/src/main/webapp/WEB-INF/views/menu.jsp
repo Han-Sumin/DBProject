@@ -13,8 +13,6 @@
         <li class="nav-item"><a href="/join" class="nav-link pl-2 text-dark">회원가입</a></li>
       </c:if>
       <c:if test="${member != null}">
-      	<li class="nav-item"><a class="nav-link link-light pl-5 text-dark" >${member.name}님, 안녕하세요.</a></li>
-      	<li class="nav-item"><a href="/detail" class="nav-link pl-2 text-dark">마이페이지</a></li>
         <li class="nav-item"><a href="/logout" class="nav-link pl-2 text-dark">로그아웃</a></li>
       </c:if>
 	</ul> 
