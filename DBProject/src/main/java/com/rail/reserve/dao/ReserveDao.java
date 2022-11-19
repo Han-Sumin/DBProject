@@ -1,12 +1,14 @@
 package com.rail.reserve.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rail.reserve.vo.ReserveVO;
+import com.rail.reserve.vo.ReservedSeatVO;
 
 @Repository
 public class ReserveDao {
@@ -17,4 +19,36 @@ public class ReserveDao {
 	public List<ReserveVO> reserve() {
 		return sqltemplate.selectList("reserve.schedulelists");
 	}
+
+	public void reservestatus(ReserveVO vo) {
+		sqltemplate.insert("reserve.reservestatus",vo);
+		
+	}
+
+	public List<Map<String, Object>> seatlists(Map<String, String> map2) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectList("reserve.seatlists",map2);
+	}
+
+	public String start(int RESERVE_ID) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectOne("reserve.start", RESERVE_ID);
+	}
+
+	public int getreserveid(ReserveVO vo) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectOne("reserve.getreserveid",vo);
+	}
+
+	public String end(int RESERVE_ID) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectOne("reserve.end",RESERVE_ID);
+	}
+
+	public int insertseat(ReservedSeatVO vo) {
+		// TODO Auto-generated method stub
+		return sqltemplate.insert("reserve.insertseat",vo);
+	}
+
+
 }

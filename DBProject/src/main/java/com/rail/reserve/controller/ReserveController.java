@@ -1,13 +1,17 @@
 package com.rail.reserve.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rail.reserve.model.ReserveService;
 import com.rail.reserve.vo.ReserveVO;
+import com.rail.reserve.vo.ReservedSeatVO;
+import com.rail.reserve.vo.TrainSeatVO;
+
+import oracle.security.crypto.core.SREntropySource;
 
 @Controller
 public class ReserveController {
@@ -27,20 +35,86 @@ public class ReserveController {
 		return mav;
 
 	}
-
-	@RequestMapping(value = "/reserveseat", method = RequestMethod.GET)
-	public ModelAndView reserveseat(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		String station_id = request.getParameter("station_id");
-		String train_id = request.getParameter("train_id");
-		String direction = request.getParameter("direction");
-		String time = request.getParameter("time");
-
-		mav.setViewName("/reserveseat?station_id=" + station_id + "&&train_id=" + train_id + "&&direction="
-				+ direction);
-
-		return mav;
+	@RequestMapping(value = "/reserve/reservedstatus",method = RequestMethod.GET)
+		public ModelAndView reservestatus() {
+			return new ModelAndView("reserve/reservedstatus");
+		
 	}
 	
+
+	@RequestMapping(value = "/reserve/reservedstatus", method = RequestMethod.POST)
+	public ModelAndView reservestatus(@RequestParam Map<String, Object> map, @ModelAttribute ReserveVO vo,HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String start = vo.getSTART_STATION();
+		String arrival = vo.getARRIVAL_STATION();
+		int start_num = Integer.parseInt(start);
+		int arrival_num = Integer.parseInt(arrival);
+		int num = Math.abs(start_num-arrival_num);
+		vo.setPRICE(num*1000);
+		service.reservestatus(vo);
+		int reserve_id = service.getreserveid(vo);
+		vo.setRESERVE_ID(reserve_id);
+		String train_id = request.getParameter("TRAIN_ID");
+		String member_id = vo.getMEMBER_ID();
+		mav.setViewName("redirect:/reserve/reserveseat?RESERVE_ID="+reserve_id+"&&TRAIN_ID="+train_id+"&&TRAIN_NUM=1&&MEMBER_ID="+member_id);
+		return mav;
+	}
+	@RequestMapping(value = "/reserve/reserveseat", method = RequestMethod.GET)
+	public ModelAndView reserveseat(@RequestParam Map<String, Object> map, @ModelAttribute TrainSeatVO vo) {
+		String TRAIN_ID = vo.getTRAIN_ID();
+		String TRAIN_NUM = vo.getTRAIN_NUM();
+		Map<String, String> map2 = new HashMap<String, String>();
+		map2.put("TRAIN_ID", TRAIN_ID);
+		map2.put("TRAIN_NUM", TRAIN_NUM);
+		List<Map<String, Object>> lists = service.seatlists(map2);
+		ModelAndView mav = new ModelAndView("reserve/reserveseat");
+		mav.addObject("lists",lists);
+		return mav;
+	}
+	@RequestMapping(value = "/reserve/reserveseat", method = RequestMethod.POST)
+	public ModelAndView reserveseat(@RequestParam Map<String, Object> map, @ModelAttribute ReservedSeatVO vo,HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		int RESERVE_ID = vo.getRESERVE_ID();
+		String start = service.start(RESERVE_ID);
+		String end = service.end(RESERVE_ID);
+		String member_id = request.getParameter("MEMBER_ID");
+		int max = 0;
+		int min = 0;
+		int start_num = Integer.parseInt(start);
+		int end_num = Integer.parseInt(end);
+		if(start_num>end_num) {
+			max = start_num;
+			min = end_num;
+			vo.setDIRECTION("상행");
+		}
+		else {
+			max = end_num;
+			min = start_num;
+			vo.setDIRECTION("하행");
+		}
+		for(int i = min; i<=max; i++) {
+			String j = String.valueOf(i);
+			vo.setSTATION_ID(j);
+			Boolean isinsert = service.insertseat(vo) ;
+			try {
+			if(isinsert) {
+				mav.setViewName("redirect:/pay?MEMBER_ID="+member_id+"&&RESERVE_ID="+RESERVE_ID);
+			}
+			else {
+				mav.setViewName("redirect:/");
+			}
+			}catch (DuplicateKeyException e) {
+				mav.setViewName("redirect:/reserve_fail");
+			}
+		}
+		
+		return mav;
+		
+	}
+	@RequestMapping(value = "/pay",method = RequestMethod.GET)
+	public ModelAndView reservelists(@RequestParam Map<String, Object> map, HttpServletRequest request) {
+		return null;
+		
+	}
 
 }

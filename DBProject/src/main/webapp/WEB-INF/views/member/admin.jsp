@@ -9,6 +9,7 @@
 <title>어드민 페이지</title>
 </head>
 <body>
+<jsp:include page="../menu.jsp"></jsp:include>
 <h1 align="center">관리자 페이지 입니다.</h1>
 <a href ="/admin/memberlist" class="btn btn-outline-primary btn-sm">회원 관리</a>
 <a href ="/admin/addTrain" class="btn btn-outline-primary btn-sm">열차 등록</a>

@@ -2,8 +2,28 @@
 <!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="reserve">
-	<insert id="insert">
-		insert into reserved_status values(RESERVE_SEQ.nextval,'')
+	<insert id="reservestatus" parameterType="hashmap">
+		insert into RESERVED_STATUS values(RESERVE_SEQ.nextval,#{MEMBER_ID},#{START_STATION},#{ARRIVAL_STATION},SYSDATE,#{PRICE},#{PAY_METHOD})
 	</insert>
+	
+	<select id="seatlists" parameterType="hashMap" resultType="hashMap">
+	select * from TRAIN_SEAT where TRAIN_ID = #{TRAIN_ID} and TRAIN_NUM = #{TRAIN_NUM}
+	</select>
+	
+	<select id="start" parameterType="int" resultType="STRING">
+	select START_STATION from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID}
+	</select>
+	
+	<select id = "getreserveid" resultType="int">
+	select RESERVE_ID from RESERVED_STATUS where MEMBER_ID = #{MEMBER_ID} and START_STATION = #{START_STATION} and ARRIVAL_STATION = #{ARRIVAL_STATION}
+	</select>
+	
+	<select id="end" parameterType="int" resultType="String">
+	select ARRIVAL_STATION from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID}
+	</select>
+	
+	<select id ="insertseat" parameterType="hashMap">
+	insert into RESERVED_SEAT values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION},#{TRAIN_NUM},#{SEAT_NUM},#{RESERVE_ID})
+	</select>
 
 </mapper>

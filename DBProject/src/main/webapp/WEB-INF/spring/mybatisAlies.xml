@@ -12,6 +12,12 @@
 			type="com.rail.reserve.vo.TrainVO" />
 		<typeAlias alias="ScheduleVO"
 			type="com.rail.reserve.vo.ScheduleVO" />
+		<typeAlias alias="ReserveVO"
+			type="com.rail.reserve.vo.ReserveVO" />
+		<typeAlias alias="ReservedSeatVO"
+			type="com.rail.reserve.vo.ReservedSeatVO" />
+		<typeAlias alias="TrainSeatVO"
+			type="com.rail.reserve.vo.TrainSeatVO" />
 
 	</typeAliases>
 

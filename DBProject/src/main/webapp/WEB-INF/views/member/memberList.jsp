@@ -10,6 +10,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
+<jsp:include page="../menu.jsp"></jsp:include>
 	<table class="table font-noto">
 		<thead>
 			<tr class="table-light">

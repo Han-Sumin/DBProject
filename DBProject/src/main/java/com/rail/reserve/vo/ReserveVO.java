@@ -9,7 +9,7 @@ public class ReserveVO {
 	private String START_STATION;
 	private String ARRIVAL_STATION;
 	private String RESERVE_DATE;
-	private String PRICE;
+	private int PRICE;
 	private String PAY_METHOD;
 	@Override
 	public String toString() {
