@@ -32,15 +32,15 @@
 	</table>
 	<h2 align="center">시간표 등록</h2>
 	<form action="/admin/addSchedule" method="post">
-		<select name="station_id" class="form-select" aria-label="기차역선택">
+		<select name="STATION_ID" class="form-select" aria-label="기차역선택">
 			<option value="1">서울</option>
 			<option value="2">천안</option>
 			<option value="3">대전</option>
 			<option value="4">대구</option>
 			<option value="5">부산</option>
-		</select> <input class="form-control" class="form-select" type="text" name="train_id"
+		</select> <input class="form-control" class="form-select" type="text" name="TRAIN_ID"
 			placeholder="열차번호" aria-label="default input example"> <select
-			name="direction" aria-label="방향선택">
+			name="DIRECTION" aria-label="방향선택">
 			<option value="상행">상행</option>
 			<option value="하행">하행</option>
 		</select> <input type="submit" class="btn btn-outline-secondary" value="등록">

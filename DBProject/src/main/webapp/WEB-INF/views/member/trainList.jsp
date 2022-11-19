@@ -30,8 +30,8 @@
 	</table>
 	<h2 align="center">열차 등록</h2>
 	<form action="/admin/addTrain" method="post">
-	<input class="form-control" type="text" name="train_id" placeholder="열차번호" aria-label="default input example">
-	<input class="form-control" type="text" name="train_name" placeholder="열차등급" aria-label="default input example">
+	<input class="form-control" type="text" name="TRAIN_ID" placeholder="열차번호" aria-label="default input example">
+	<input class="form-control" type="text" name="TRAIN_NAME" placeholder="열차등급" aria-label="default input example">
 	<input type="submit" class="btn btn-outline-secondary" value="등록">
 	</form>
 </body>

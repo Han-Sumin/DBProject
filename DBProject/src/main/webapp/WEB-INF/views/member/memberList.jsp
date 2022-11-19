@@ -30,12 +30,12 @@
 					<td style="vertical-align: middle; text-align: center;">${data.PHONE}</td>
 					<td style="vertical-align: middle; text-align: center;">
 						<form action="/memberGradeUpdate" method="post">
-							<select name="grade">
+							<select name="GRADE">
 								<option selected>${data.GRADE}</option>
 								<option>SILVER</option>
 								<option>GOLD</option>
 								<option>VIP</option>
-							</select> <input type="hidden" name="member_id" value="${data.MEMBER_ID}">
+							</select> <input type="hidden" name="MEMBER_ID" value="${data.MEMBER_ID}">
 							<input type="submit" class="btn btn-outline-secondary" value="수정">
 						</form>
 					</td>

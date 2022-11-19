@@ -22,7 +22,7 @@ public class ReserveController {
 	private ReserveService service;
 
 	@RequestMapping(value = "/reserve", method = RequestMethod.GET)
-	public ModelAndView reserve(@RequestParam String member_id) {
+	public ModelAndView reserve(@RequestParam String MEMBER_ID) {
 		ModelAndView mav = new ModelAndView("reserve/reserve");
 		return mav;
 

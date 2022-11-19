@@ -14,13 +14,13 @@
 		<section id="content">
 			<form name="login" class="form-horizontal" method="post">
 				<div class="mb-3">
-					<label for="member_id">아이디</label> <input type="text" id="member_id"
-						name="member_id" required="required" class="form-control"/>
+					<label for="MEMBER_ID">아이디</label> <input type="text" id="MEMBER_ID"
+						name="MEMBER_ID" required="required" class="form-control"/>
 				</div>
 
 				<div class="mb-3">
-					<label for="password">패스워드</label> <input type="password"
-						id="password" name="password" required="required" class="form-control"/>
+					<label for="PASSWORD">패스워드</label> <input type="password"
+						id="PASSWORD" name="PASSWORD" required="required" class="form-control"/>
 				</div>
 				<div class="form-group  row">
 					<div class="col-sm-offset-2 col-sm-10 ">

@@ -61,11 +61,11 @@ public class MemberController {
 		if (result != null) {
 			mav.addObject("member", result);
 			session.setAttribute("member", result);
-			String member_id = vo.getMember_id();
+			String member_id = vo.getMEMBER_ID();
 			if (member_id.equals("admin")) {
 				mav.setViewName("redirect:/admin");
 			} else {
-				mav.setViewName("redirect:/reserve?member_id=" + member_id);
+				mav.setViewName("redirect:/reserve?MEMBER_ID=" + member_id);
 			}
 			session.setAttribute("member", result);
 

@@ -4,12 +4,13 @@ import lombok.Data;
 
 @Data
 public class TrainVO {
-	private String train_id;
-	private String train_name;
+	private String TRAIN_ID;
+	private String TRAIN_NAME;
 	@Override
 	public String toString() {
-		return "TrainVO [train_id=" + train_id + ", train_name=" + train_name + "]";
+		return "TrainVO [TRAIN_ID=" + TRAIN_ID + ", TRAIN_NAME=" + TRAIN_NAME + "]";
 	}
+	
 	
 	
 }

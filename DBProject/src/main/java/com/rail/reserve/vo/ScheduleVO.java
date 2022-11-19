@@ -4,12 +4,14 @@ import lombok.Data;
 
 @Data
 public class ScheduleVO {
-    private String station_id;
-    private String train_id;
-    private String direction;
+	private String STATION_ID;
+	private String TRAIN_ID;
+	private String DIRECTION;
 	@Override
 	public String toString() {
-		return "ScheduleVO [station_id=" + station_id + ", train_id=" + train_id + ", direction=" + direction + "]";
+		return "ScheduleVO [STATION_ID=" + STATION_ID + ", TRAIN_ID=" + TRAIN_ID + ", DIRECTION=" + DIRECTION + "]";
 	}
+	
+	
     
 }
