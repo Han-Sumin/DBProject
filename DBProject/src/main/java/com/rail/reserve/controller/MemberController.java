@@ -103,6 +103,7 @@ public class MemberController {
 	public ModelAndView gradeUpdate(@RequestParam Map<String, Object> map) {
 		ModelAndView mav = new ModelAndView();
 		service.update(map);
+		mav.setViewName("redirect:/admin/memberlist");
 		return mav;
 	}
 	

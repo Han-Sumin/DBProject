@@ -30,7 +30,10 @@ public interface ReserveService {
 	Boolean insertseat(ReservedSeatVO vo);
 
 
+	List<ReserveVO> pay(Map<String, String> map2);
 
+
+	String cost(Map<String, String> map3);
 
 
 

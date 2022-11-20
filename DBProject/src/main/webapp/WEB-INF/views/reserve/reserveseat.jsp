@@ -22,7 +22,7 @@
 	int reserveId = Integer.parseInt(reserve_id);
 	%>
 
-	<p><%=reserveId%></p>
+
 	<a
 		href="/reserve/reserveseat?RESERVE_ID=<%=reserve_id%>&&TRAIN_ID=<%=train_id%>&&TRAIN_NUM=1&&MEMBER_ID=<%=member_id%>">1호차</a>
 	<a

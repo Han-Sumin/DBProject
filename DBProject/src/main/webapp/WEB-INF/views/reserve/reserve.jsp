@@ -11,12 +11,6 @@
 </head>
 <body>
 	<jsp:include page="../menu.jsp"></jsp:include>
-	<ul class="nav font-noto border-bottom">
-		<c:if test="${member != null}">
-			<li class="nav-item"><a href="/logout"
-				class="nav-link pl-2 text-dark">로그아웃</a></li>
-		</c:if>
-	</ul>
 	<%
 	String member_id = request.getParameter("MEMBER_ID");
 	%>
@@ -26,7 +20,7 @@
 	<h2 align="center">출발역과 도착역을 선택하여 주세요.</h2>
 	<form action="/reserve/reservedstatus" method="post">
 		<input type="hidden" name="MEMBER_ID" value="<%=member_id%>">
-		<select name="START_STATION" aria-label="기차역선택" class="form-select">
+		<select name="START_STATION" aria-label="기차역선택" class="selectpicker">
 			<option selected>출발역</option>
 			<option value="1">서울</option>
 			<option value="2">천안</option>
@@ -42,10 +36,10 @@
 			<option value="5">부산</option>
 		</select> <select name="PAY_METHOD" class="form-select" aria-label="결제방법선택">
 			<option selected>결제방법</option>
-			<option value="card">카드</option>
-			<option value="transfer">계좌이체</option>
+			<option value="카드">카드</option>
+			<option value="계좌이체">계좌이체</option>
 		</select> <select name="TRAIN_ID" class="form-select" aria-label="열차등급선택">
-			<option selected>결제방법</option>
+			<option selected>열차등급</option>
 			<option value="1234">무궁화호</option>
 			<option value="1235">새마을호</option>
 		</select>

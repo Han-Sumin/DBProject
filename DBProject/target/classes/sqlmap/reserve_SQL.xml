@@ -3,7 +3,7 @@
 
 <mapper namespace="reserve">
 	<insert id="reservestatus" parameterType="hashmap">
-		insert into RESERVED_STATUS values(RESERVE_SEQ.nextval,#{MEMBER_ID},#{START_STATION},#{ARRIVAL_STATION},SYSDATE,#{PRICE},#{PAY_METHOD})
+		insert into RESERVED_STATUS values(SEQ.nextval,#{MEMBER_ID},#{START_STATION},#{ARRIVAL_STATION},SYSDATE,#{PRICE},#{PAY_METHOD})
 	</insert>
 	
 	<select id="seatlists" parameterType="hashMap" resultType="hashMap">
@@ -24,6 +24,16 @@
 	
 	<select id ="insertseat" parameterType="hashMap">
 	insert into RESERVED_SEAT values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION},#{TRAIN_NUM},#{SEAT_NUM},#{RESERVE_ID})
+	</select>
+	
+	<select id="pay" parameterType="hashMap" resultType="hashMap">
+		select * from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID} and MEMBER_ID
+		= #{MEMBER_ID}
+	</select>
+	
+	<select id="cost" parameterType="String" resultType="String">
+	select COST from COST_TABLE where START_STATION = #{START_STATION} and ARRIVAL_STATION
+		= #{ARRIVAL_STATION} and TRAIN_ID = #{TRAIN_ID}
 	</select>
 
 </mapper>

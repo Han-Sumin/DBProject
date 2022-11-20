@@ -50,5 +50,15 @@ public class ReserveDao {
 		return sqltemplate.insert("reserve.insertseat",vo);
 	}
 
+	public List<ReserveVO> pay(Map<String, String> map2) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectList("reserve.pay",map2);
+	}
+
+	public String cost(Map<String, String> map3) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectOne("reserve.cost",map3);
+	}
+
 
 }

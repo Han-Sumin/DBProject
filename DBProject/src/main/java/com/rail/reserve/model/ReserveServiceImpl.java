@@ -65,6 +65,20 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 
+	@Override
+	public List<ReserveVO> pay(Map<String, String> map2) {
+		// TODO Auto-generated method stub
+		return dao.pay(map2);
+	}
+
+
+	@Override
+	public String cost(Map<String, String> map3) {
+		// TODO Auto-generated method stub
+		return dao.cost(map3);
+	}
+
+
 
 
 

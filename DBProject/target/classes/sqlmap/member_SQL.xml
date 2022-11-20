@@ -4,37 +4,40 @@
 <mapper namespace="member">
 	<insert id="insert" parameterType="hashmap">
 		insert into MEMBER
-		values(#{MEMBER_ID},#{PASSWORD},#{NAME},#{PHONE},#{GRADE},#{CARD},#{FLAG})
+		values(#{MEMBER_ID},#{PASSWORD},#{NAME},#{PHONE},#{GRADE},#{CARD})
 	</insert>
-	
+
 	<select id="login" parameterType="hashMap" resultType="hashMap">
-	 select * from MEMBER 
-	 where MEMBER_ID = #{MEMBER_ID}
-	 and PASSWORD = #{PASSWORD}
+		select * from MEMBER
+		where MEMBER_ID = #{MEMBER_ID}
+		and PASSWORD = #{PASSWORD}
 	</select>
-	
+
 	<select id="lists" parameterType="hashMap" resultType="hashMap">
-	select * from MEMBER
+		select * from MEMBER
 	</select>
-	
+
 	<update id="gradeUpdate">
-	update MEMBER set GRADE =
+		update MEMBER set GRADE =
 		#{GRADE} where MEMBER_ID = #{MEMBER_ID}
 	</update>
-	
-	<select id="trainlists" parameterType="hashMap" resultType="hashMap">
-	select * from TRAIN
+
+	<select id="trainlists" parameterType="hashMap"
+		resultType="hashMap">
+		select * from TRAIN
 	</select>
-	
+
 	<insert id="addtrain" parameterType="hashMap">
-	insert into TRAIN
-	values(#{TRAIN_ID},#{TRAIN_NAME})
+		insert into TRAIN
+		values(#{TRAIN_ID},#{TRAIN_NAME})
 	</insert>
-	<select id="schedulelists" parameterType="hashMap" resultType="hashMap">
-	select * from SCHEDULE
+	<select id="schedulelists" parameterType="hashMap"
+		resultType="hashMap">
+		select * from SCHEDULE
 	</select>
 	<insert id="addSchedule">
-	insert into SCHEDULE
-	values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION})
+		insert into SCHEDULE
+		values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION})
 	</insert>
+
 </mapper>
