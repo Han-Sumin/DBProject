@@ -61,6 +61,31 @@ public class MemberDao {
 		
 	}
 
+	public List<MemberVO> mypage(String MEMBER_ID) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectList("member.mypage",MEMBER_ID);
+	}
+
+	public void nameupdate(Map<String, Object> map) {
+		sqltemplate.update("member.nameupdate",map);
+		
+	}
+
+	public void phoneupdate(Map<String, Object> map) {
+		sqltemplate.update("member.phoneupdate",map);
+		
+	}
+
+	public void cardupdate(Map<String, Object> map) {
+		sqltemplate.update("member.cardupdate",map);
+		
+	}
+
+	public void deletemember(Map<String, Object> map) {
+		sqltemplate.delete("member.delete",map);
+		
+	}
+
 	
 
 }

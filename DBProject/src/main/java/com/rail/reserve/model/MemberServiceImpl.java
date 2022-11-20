@@ -71,6 +71,36 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public List<MemberVO> mypage(String MEMBER_ID) {
+		// TODO Auto-generated method stub
+		return dao.mypage(MEMBER_ID);
+	}
+
+	@Override
+	public void nameupdate(Map<String, Object> map) {
+		dao.nameupdate(map);
+		
+	}
+
+	@Override
+	public void phoneupdate(Map<String, Object> map) {
+		dao.phoneupdate(map);
+		
+	}
+
+	@Override
+	public void cardupdate(Map<String, Object> map) {
+		dao.cardupdate(map);
+		
+	}
+
+	@Override
+	public void deletemember(Map<String, Object> map) {
+		dao.deletemember(map);
+		
+	}
+
 	
 
 

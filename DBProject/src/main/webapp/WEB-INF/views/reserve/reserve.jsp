@@ -14,6 +14,10 @@
 	<%
 	String member_id = request.getParameter("MEMBER_ID");
 	%>
+	<c:url value="/mypage" var="url">
+	<c:param name="MEMBER_ID" value="<%=member_id%>"></c:param>
+	</c:url>
+	<a href="${url}">내 정보</a>
 	<h1>열차 운행표</h1>
 
 	<h1 align="center">예매하기</h1>

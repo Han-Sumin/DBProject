@@ -28,4 +28,14 @@ public interface MemberService {
 
 	void addSchedule(Map<String, Object> map);
 
+	List<MemberVO> mypage(String MEMBER_ID);
+
+	void nameupdate(Map<String, Object> map);
+
+	void phoneupdate(Map<String, Object> map);
+
+	void cardupdate(Map<String, Object> map);
+
+	void deletemember(Map<String, Object> map);
+
 }

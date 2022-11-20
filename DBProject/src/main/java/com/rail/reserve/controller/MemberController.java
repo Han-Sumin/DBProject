@@ -3,6 +3,7 @@ package com.rail.reserve.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -90,50 +91,103 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView("member/admin");
 		return mav;
 	}
-	
-	@RequestMapping(value="/admin/memberlist", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/admin/memberlist", method = RequestMethod.GET)
 	public ModelAndView memberlists() {
 		List<MemberVO> lists = service.list();
 		ModelAndView mav = new ModelAndView("member/memberList");
-		mav.addObject("memberlists",lists);
+		mav.addObject("memberlists", lists);
 		return mav;
 	}
-	
-	@RequestMapping(value = "/memberGradeUpdate",method = RequestMethod.POST)
+
+	@RequestMapping(value = "/memberGradeUpdate", method = RequestMethod.POST)
 	public ModelAndView gradeUpdate(@RequestParam Map<String, Object> map) {
 		ModelAndView mav = new ModelAndView();
 		service.update(map);
 		mav.setViewName("redirect:/admin/memberlist");
 		return mav;
 	}
-	
-	@RequestMapping(value = "/admin/addTrain",method = RequestMethod.GET)
+
+	@RequestMapping(value = "/admin/addTrain", method = RequestMethod.GET)
 	public ModelAndView trainlists() {
 		List<TrainVO> trainlists = service.trainlists();
 		ModelAndView mav = new ModelAndView("member/trainList");
-		mav.addObject("lists",trainlists);
+		mav.addObject("lists", trainlists);
 		return mav;
 	}
-	
-	@RequestMapping(value = "/admin/addTrain",method = RequestMethod.POST)
+
+	@RequestMapping(value = "/admin/addTrain", method = RequestMethod.POST)
 	public ModelAndView addTrain(@RequestParam Map<String, Object> map) {
 		ModelAndView mav = new ModelAndView();
 		service.addTrain(map);
 		mav.setViewName("redirect:/admin");
 		return mav;
 	}
-	@RequestMapping(value = "/admin/addSchedule",method = RequestMethod.GET)
+
+	@RequestMapping(value = "/admin/addSchedule", method = RequestMethod.GET)
 	public ModelAndView schedulelists() {
 		List<TrainVO> schedulelists = service.schedulelists();
 		ModelAndView mav = new ModelAndView("member/scheduleList");
-		mav.addObject("lists",schedulelists);
+		mav.addObject("lists", schedulelists);
 		return mav;
 	}
-	@RequestMapping(value = "/admin/addSchedule",method = RequestMethod.POST)
+
+	@RequestMapping(value = "/admin/addSchedule", method = RequestMethod.POST)
 	public ModelAndView addSchedule(@RequestParam Map<String, Object> map) {
 		ModelAndView mav = new ModelAndView();
 		service.addSchedule(map);
 		mav.setViewName("redirect:/admin");
 		return mav;
+	}
+
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public ModelAndView mypage(@RequestParam String MEMBER_ID) {
+		List<MemberVO> lists = service.mypage(MEMBER_ID);
+		ModelAndView mav = new ModelAndView("member/mypage");
+		mav.addObject("lists", lists);
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/nameUpdate", method = RequestMethod.POST)
+	public ModelAndView nameupdate(@RequestParam Map<String, Object> map, @ModelAttribute MemberVO vo) {
+		ModelAndView mav = new ModelAndView();
+		String member_id = vo.getMEMBER_ID();
+		service.nameupdate(map);
+		mav.setViewName("redirect:/mypage?MEMBER_ID=" + member_id);
+		return mav;
+
+	}
+	@RequestMapping(value = "/phoneUpdate", method = RequestMethod.POST)
+	public ModelAndView phoneupdate(@RequestParam Map<String, Object> map, @ModelAttribute MemberVO vo) {
+		ModelAndView mav = new ModelAndView();
+		String member_id = vo.getMEMBER_ID();
+		service.phoneupdate(map);
+		mav.setViewName("redirect:/mypage?MEMBER_ID=" + member_id);
+		return mav;
+
+	}
+	@RequestMapping(value = "/cardUpdate", method = RequestMethod.POST)
+	public ModelAndView cardupdate(@RequestParam Map<String, Object> map, @ModelAttribute MemberVO vo) {
+		ModelAndView mav = new ModelAndView();
+		String member_id = vo.getMEMBER_ID();
+		service.cardupdate(map);
+		mav.setViewName("redirect:/mypage?MEMBER_ID=" + member_id);
+		return mav;
+
+	}
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete() {
+		ModelAndView mav = new ModelAndView("member/delete");
+		return mav;
+
+	}
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public ModelAndView delete(@RequestParam Map<String, Object> map) {
+		ModelAndView mav = new ModelAndView();
+		service.deletemember(map);
+		mav.setViewName("redirect:/");
+		return mav;
+
 	}
 }

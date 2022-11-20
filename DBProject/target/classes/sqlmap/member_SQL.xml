@@ -8,18 +8,21 @@
 	</insert>
 
 	<select id="login" parameterType="hashMap" resultType="hashMap">
-		select * from MEMBER
+		select *
+		from MEMBER
 		where MEMBER_ID = #{MEMBER_ID}
 		and PASSWORD = #{PASSWORD}
 	</select>
 
 	<select id="lists" parameterType="hashMap" resultType="hashMap">
-		select * from MEMBER
+		select *
+		from MEMBER
 	</select>
 
 	<update id="gradeUpdate">
 		update MEMBER set GRADE =
-		#{GRADE} where MEMBER_ID = #{MEMBER_ID}
+		#{GRADE} where MEMBER_ID =
+		#{MEMBER_ID}
 	</update>
 
 	<select id="trainlists" parameterType="hashMap"
@@ -39,5 +42,21 @@
 		insert into SCHEDULE
 		values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION})
 	</insert>
+	<select id="mypage" parameterType="String" resultType="hashMap">
+		select * from member where MEMBER_ID = #{MEMBER_ID}
+	</select>
 
+	<update id="nameupdate">
+		update MEMBER set NAME = #{NAME} where MEMBER_ID = #{MEMBER_ID}
+	</update>
+
+	<update id="phoneupdate">
+		update MEMBER set PHONE = #{PHONE} where MEMBER_ID = #{MEMBER_ID}
+	</update>
+	<update id="cardupdate">
+		update MEMBER set CARD = #{CARD} where MEMBER_ID = #{MEMBER_ID}
+	</update>
+	<delete id="delete">
+		delete from MEMBER where MEMBER_ID = #{MEMBER_ID}
+	</delete>
 </mapper>
