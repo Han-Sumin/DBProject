@@ -43,20 +43,32 @@
 		values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION})
 	</insert>
 	<select id="mypage" parameterType="String" resultType="hashMap">
-		select * from member where MEMBER_ID = #{MEMBER_ID}
+		select *
+		from member where MEMBER_ID = #{MEMBER_ID}
 	</select>
 
 	<update id="nameupdate">
-		update MEMBER set NAME = #{NAME} where MEMBER_ID = #{MEMBER_ID}
+		update MEMBER set NAME = #{NAME} where MEMBER_ID =
+		#{MEMBER_ID}
 	</update>
 
 	<update id="phoneupdate">
-		update MEMBER set PHONE = #{PHONE} where MEMBER_ID = #{MEMBER_ID}
+		update MEMBER set PHONE = #{PHONE} where MEMBER_ID =
+		#{MEMBER_ID}
 	</update>
 	<update id="cardupdate">
-		update MEMBER set CARD = #{CARD} where MEMBER_ID = #{MEMBER_ID}
+		update MEMBER set CARD = #{CARD} where MEMBER_ID =
+		#{MEMBER_ID}
 	</update>
 	<delete id="delete">
 		delete from MEMBER where MEMBER_ID = #{MEMBER_ID}
 	</delete>
+
+	<select id="reservelists" parameterType="String" resultType="hashMap">
+		select * from RESERVED_STATUS where MEMBER_ID =
+		#{MEMBER_ID}
+	</select>
+	<update id="updatepay">
+	update RESERVED_STATUS set PAY_METHOD = #{PAY_METHOD} where MEMBER_ID = #{MEMBER_ID}
+	</update>
 </mapper>

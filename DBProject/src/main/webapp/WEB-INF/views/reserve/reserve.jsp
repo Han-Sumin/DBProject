@@ -18,7 +18,10 @@
 	<c:param name="MEMBER_ID" value="<%=member_id%>"></c:param>
 	</c:url>
 	<a href="${url}">내 정보</a>
-	<h1>열차 운행표</h1>
+	<c:url value="/reservelists" var="reservelists">
+	<c:param name="MEMBER_ID" value="<%=member_id%>"></c:param>
+	</c:url>
+	<a href="${reservelists}">예약현황</a>
 
 	<h1 align="center">예매하기</h1>
 	<h2 align="center">출발역과 도착역을 선택하여 주세요.</h2>

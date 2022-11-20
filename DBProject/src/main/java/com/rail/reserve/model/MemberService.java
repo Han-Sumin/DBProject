@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import com.rail.reserve.vo.MemberVO;
+import com.rail.reserve.vo.ReserveVO;
 import com.rail.reserve.vo.TrainVO;
 
 public interface MemberService {
@@ -37,5 +38,9 @@ public interface MemberService {
 	void cardupdate(Map<String, Object> map);
 
 	void deletemember(Map<String, Object> map);
+
+	List<ReserveVO> reservelists(String MEMBER_ID);
+
+	void updatepay(Map<String, Object> map);
 
 }

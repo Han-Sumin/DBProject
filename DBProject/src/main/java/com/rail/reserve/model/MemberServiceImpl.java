@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.rail.reserve.dao.MemberDao;
 import com.rail.reserve.vo.MemberVO;
+import com.rail.reserve.vo.ReserveVO;
 import com.rail.reserve.vo.TrainVO;
 
 @Service
@@ -99,6 +100,18 @@ public class MemberServiceImpl implements MemberService {
 	public void deletemember(Map<String, Object> map) {
 		dao.deletemember(map);
 		
+	}
+
+	@Override
+	public List<ReserveVO> reservelists(String MEMBER_ID) {
+		// TODO Auto-generated method stub
+		return dao.reservelists(MEMBER_ID);
+	}
+
+	@Override
+	public void updatepay(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		dao.updatepay(map);
 	}
 
 	

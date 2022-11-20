@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rail.reserve.HomeController;
 import com.rail.reserve.model.MemberService;
 import com.rail.reserve.vo.MemberVO;
+import com.rail.reserve.vo.ReserveVO;
 import com.rail.reserve.vo.TrainVO;
 
 @Controller
@@ -187,6 +188,23 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		service.deletemember(map);
 		mav.setViewName("redirect:/");
+		return mav;
+
+	}
+	@RequestMapping(value = "/reservelists", method = RequestMethod.GET)
+	public ModelAndView reservelists(@RequestParam String MEMBER_ID) {
+		List<ReserveVO> lists = service.reservelists(MEMBER_ID);
+		ModelAndView mav = new ModelAndView("member/reservelists");
+		mav.addObject("lists", lists);
+		return mav;
+
+	}
+	@RequestMapping(value = "/updatepay", method = RequestMethod.POST)
+	public ModelAndView updatepay(@RequestParam Map<String, Object> map, @ModelAttribute ReserveVO vo) {
+		ModelAndView mav = new ModelAndView();
+		String member_id = vo.getMEMBER_ID();
+		service.updatepay(map);
+		mav.setViewName("redirect:/reservelists?MEMBER_ID="+member_id);
 		return mav;
 
 	}

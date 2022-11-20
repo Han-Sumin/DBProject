@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rail.reserve.vo.MemberVO;
+import com.rail.reserve.vo.ReserveVO;
 import com.rail.reserve.vo.TrainVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -83,6 +84,16 @@ public class MemberDao {
 
 	public void deletemember(Map<String, Object> map) {
 		sqltemplate.delete("member.delete",map);
+		
+	}
+
+	public List<ReserveVO> reservelists(String MEMBER_ID) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectList("member.reservelists",MEMBER_ID);
+	}
+
+	public void updatepay(Map<String, Object> map) {
+		sqltemplate.update("member.updatepay",map);
 		
 	}
 
