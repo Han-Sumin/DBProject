@@ -12,7 +12,7 @@ import com.rail.reserve.vo.ReservedSeatVO;
 
 @Service
 public class ReserveServiceImpl implements ReserveService {
-	
+
 	@Autowired
 	private ReserveDao dao;
 
@@ -21,13 +21,11 @@ public class ReserveServiceImpl implements ReserveService {
 		return dao.reserve();
 	}
 
-
 	@Override
 	public void reservestatus(ReserveVO vo) {
 		dao.reservestatus(vo);
-		
-	}
 
+	}
 
 	@Override
 	public List<Map<String, Object>> seatlists(Map<String, String> map2) {
@@ -35,13 +33,11 @@ public class ReserveServiceImpl implements ReserveService {
 		return dao.seatlists(map2);
 	}
 
-
 	@Override
 	public String start(int RESERVE_ID) {
 		// TODO Auto-generated method stub
 		return dao.start(RESERVE_ID);
 	}
-
 
 	@Override
 	public int getreserveid(ReserveVO vo) {
@@ -49,21 +45,17 @@ public class ReserveServiceImpl implements ReserveService {
 		return dao.getreserveid(vo);
 	}
 
-
 	@Override
 	public String end(int RESERVE_ID) {
 		// TODO Auto-generated method stub
 		return dao.end(RESERVE_ID);
 	}
 
-
 	@Override
-	public Boolean insertseat(ReservedSeatVO vo) {
+	public void insertseat(ReservedSeatVO vo) {
 		// TODO Auto-generated method stub
-		int result = dao.insertseat(vo);
-		return result == 1;
+		dao.insertseat(vo);
 	}
-
 
 	@Override
 	public List<ReserveVO> pay(Map<String, String> map2) {
@@ -71,16 +63,22 @@ public class ReserveServiceImpl implements ReserveService {
 		return dao.pay(map2);
 	}
 
-
 	@Override
 	public String cost(Map<String, String> map3) {
 		// TODO Auto-generated method stub
 		return dao.cost(map3);
 	}
 
+	@Override
+	public int count(ReservedSeatVO vo) {
+		// TODO Auto-generated method stub
+		return dao.count(vo);
+	}
 
-
-
-
+	@Override
+	public void delete(int RESERVE_ID) {
+		// TODO Auto-generated method stub
+		dao.delete(RESERVE_ID);
+	}
 
 }

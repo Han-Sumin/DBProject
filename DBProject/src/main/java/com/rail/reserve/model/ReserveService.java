@@ -27,13 +27,19 @@ public interface ReserveService {
 	String end(int RESERVE_ID);
 
 
-	Boolean insertseat(ReservedSeatVO vo);
+	void insertseat(ReservedSeatVO vo);
 
 
 	List<ReserveVO> pay(Map<String, String> map2);
 
 
 	String cost(Map<String, String> map3);
+
+
+	int count(ReservedSeatVO vo);
+
+
+	void delete(int RESERVE_ID);
 
 
 

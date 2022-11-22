@@ -103,14 +103,15 @@ public class ReserveController {
 		for (int i = min; i <= max; i++) {
 			String j = String.valueOf(i);
 			vo.setSTATION_ID(j);
-			Boolean isinsert = service.insertseat(vo);
-
-			if (isinsert) {
+			int count = service.count(vo);
+			if (count == 0) {
+				service.insertseat(vo);
 				mav.setViewName(
 						"redirect:/pay?MEMBER_ID=" + member_id + "&&RESERVE_ID=" + RESERVE_ID + "&&START_STATION="
 								+ start + "&&ARRIVAL_STATION=" + end + "&&TRAIN_ID=" + train_id + "&&COST=" + cost);
-			} else {
-				mav.setViewName("redirect:/");
+			}else {
+				service.delete(RESERVE_ID);
+				mav.setViewName("redirect:/reserve/reserve_fail?MEMBER_ID=" + member_id);
 			}
 
 		}
@@ -136,9 +137,10 @@ public class ReserveController {
 
 	}
 
-	@ExceptionHandler
-	public ModelAndView handler(Exception e) {
-		return new ModelAndView("reserve/reserve_fail");
+	@RequestMapping(value = "/reserve/reserve_fail", method = RequestMethod.GET)
+	public ModelAndView reserve_fail(@RequestParam String MEMBER_ID) {
+		ModelAndView mav = new ModelAndView("reserve/reserve_fail");
+		return mav;
 	}
 
 }

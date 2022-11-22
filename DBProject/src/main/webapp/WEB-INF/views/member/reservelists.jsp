@@ -10,6 +10,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
+	<%
+	String member_id = request.getParameter("MEMBER_ID");
+	%>
 	<h4 align="center">역번호는 1 : 서울, 2 : 천안, 3 : 대전, 4 : 대구, 5 : 부산입니다.</h4>
 	<table class="table font-noto">
 		<thead>
@@ -50,6 +53,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<a href="/" class="btn btn-outline-success">돌아가기</a>
+	<c:url value="/reserve" var="url">
+	<c:param name="MEMBER_ID" value="<%=member_id%>"></c:param>
+	</c:url>
+	<a href="${url }" class = " btn btn-outline-success">돌아가기</a>
 </body>
 </html>

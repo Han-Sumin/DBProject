@@ -45,9 +45,9 @@ public class ReserveDao {
 		return sqltemplate.selectOne("reserve.end",RESERVE_ID);
 	}
 
-	public int insertseat(ReservedSeatVO vo) {
+	public void insertseat(ReservedSeatVO vo) {
 		// TODO Auto-generated method stub
-		return sqltemplate.insert("reserve.insertseat",vo);
+		sqltemplate.insert("reserve.insertseat",vo);
 	}
 
 	public List<ReserveVO> pay(Map<String, String> map2) {
@@ -58,6 +58,16 @@ public class ReserveDao {
 	public String cost(Map<String, String> map3) {
 		// TODO Auto-generated method stub
 		return sqltemplate.selectOne("reserve.cost",map3);
+	}
+
+	public int count(ReservedSeatVO vo) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectOne("reserve.count",vo) ;
+	}
+
+	public void delete(int RESERVE_ID) {
+		// TODO Auto-generated method stub
+		sqltemplate.delete("reserve.delete",RESERVE_ID);
 	}
 
 

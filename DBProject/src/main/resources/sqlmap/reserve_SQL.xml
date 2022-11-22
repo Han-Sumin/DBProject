@@ -3,37 +3,64 @@
 
 <mapper namespace="reserve">
 	<insert id="reservestatus" parameterType="hashmap">
-		insert into RESERVED_STATUS values(SEQ.nextval,#{MEMBER_ID},#{START_STATION},#{ARRIVAL_STATION},SYSDATE,#{PRICE},#{PAY_METHOD})
+		insert into
+		RESERVED_STATUS
+		values(SEQ.nextval,#{MEMBER_ID},#{START_STATION},#{ARRIVAL_STATION},SYSDATE,#{PRICE},#{PAY_METHOD})
 	</insert>
-	
-	<select id="seatlists" parameterType="hashMap" resultType="hashMap">
-	select * from TRAIN_SEAT where TRAIN_ID = #{TRAIN_ID} and TRAIN_NUM = #{TRAIN_NUM}
+
+	<select id="seatlists" parameterType="hashMap"
+		resultType="hashMap">
+		select * from TRAIN_SEAT where TRAIN_ID = #{TRAIN_ID} and
+		TRAIN_NUM =
+		#{TRAIN_NUM}
 	</select>
-	
+
 	<select id="start" parameterType="int" resultType="STRING">
-	select START_STATION from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID}
+		select
+		START_STATION from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID}
 	</select>
-	
-	<select id = "getreserveid" resultType="int">
-	select RESERVE_ID from RESERVED_STATUS where MEMBER_ID = #{MEMBER_ID} and START_STATION = #{START_STATION} and ARRIVAL_STATION = #{ARRIVAL_STATION}
+
+	<select id="getreserveid" resultType="int">
+		select RESERVE_ID from
+		RESERVED_STATUS where MEMBER_ID = #{MEMBER_ID} and
+		START_STATION =
+		#{START_STATION} and ARRIVAL_STATION =
+		#{ARRIVAL_STATION}
 	</select>
-	
+
 	<select id="end" parameterType="int" resultType="String">
-	select ARRIVAL_STATION from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID}
+		select
+		ARRIVAL_STATION from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID}
 	</select>
-	
-	<select id ="insertseat" parameterType="hashMap">
-	insert into RESERVED_SEAT values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION},#{TRAIN_NUM},#{SEAT_NUM},#{RESERVE_ID})
+
+	<select id="insertseat" parameterType="hashMap">
+		insert into RESERVED_SEAT
+		values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION},#{TRAIN_NUM},#{SEAT_NUM},#{RESERVE_ID})
 	</select>
-	
+
 	<select id="pay" parameterType="hashMap" resultType="hashMap">
-		select * from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID} and MEMBER_ID
-		= #{MEMBER_ID}
+		select *
+		from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID} and MEMBER_ID
+		=
+		#{MEMBER_ID}
 	</select>
-	
+
 	<select id="cost" parameterType="String" resultType="String">
-	select COST from COST_TABLE where START_STATION = #{START_STATION} and ARRIVAL_STATION
+		select COST
+		from COST_TABLE where START_STATION = #{START_STATION} and
+		ARRIVAL_STATION
 		= #{ARRIVAL_STATION} and TRAIN_ID = #{TRAIN_ID}
 	</select>
+
+	<select id="count" parameterType="HashMap" resultType="_integer">
+		select
+		count(*) from RESERVED_SEAT where STATION_ID = #{STATION_ID} and
+		TRAIN_ID = #{TRAIN_ID} and DIRECTION = #{DIRECTION} and TRAIN_NUM =
+		#{TRAIN_NUM} and SEAT_NUM = #{SEAT_NUM}
+	</select>
+
+	<delete id="delete">
+		delete from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID}
+	</delete>
 
 </mapper>

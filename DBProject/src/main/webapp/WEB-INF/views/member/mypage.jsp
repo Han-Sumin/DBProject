@@ -51,5 +51,9 @@
 	<c:param name="MEMBER_ID" value="<%=member_id%>"></c:param>
 	</c:url>
 	<a href="${url}" class="btn btn-danger">탈퇴하기</a>
+	<c:url value="/reserve" var="re">
+	<c:param name="MEMBER_ID" value="<%=member_id%>"></c:param>
+	</c:url>
+	<a href="${re}" class="btn btn-outline-success">돌아가기</a>
 </body>
 </html>

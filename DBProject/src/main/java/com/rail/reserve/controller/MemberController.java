@@ -42,8 +42,6 @@ public class MemberController {
 			ModelAndView mav = new ModelAndView();
 			String psw = sha256.encrypt(vo.getPASSWORD());
 			vo.setPASSWORD(psw);
-			System.out.println(vo.getMEMBER_ID());
-			System.out.println(vo.getPASSWORD());
 			boolean isCreated = service.join(vo);
 			if (isCreated) {
 				mav.setViewName("redirect:/");
