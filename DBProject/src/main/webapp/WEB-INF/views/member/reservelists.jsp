@@ -10,7 +10,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<h4 align="center">역번호는 1 : 서울, 2 : 천안, 3 : 대전, 4 : 대구, 5 : 부산입니다.</h4>
+	<h4 align="center">역번호는 1 : 서울, 2 : 천안, 3 : 대전, 4 : 대구, 5 : 부산입니다.</h4>
 	<table class="table font-noto">
 		<thead>
 			<tr class="table-light">
@@ -19,6 +19,7 @@
 				<th scope="col" style="text-align: center;">도착역</th>
 				<th scope="col" style="text-align: center;">예약날짜</th>
 				<th scope="col" style="text-align: center;">결제방법</th>
+				<th scope="col" style="text-align: center;">취소</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,9 +39,17 @@
 							</select> <input type="submit" class="btn btn-outline-secondary"
 								value="수정">
 						</form></td>
+					<td style="vertical-align: middle; text-align: center;">
+						<form action="/deletereserve" method="post">
+							<input type="hidden" name="MEMBER_ID" value="${data.MEMBER_ID}">
+							<input type="hidden" name="RESERVE_ID" value="${data.RESERVE_ID}">
+							<input type="submit" class="btn btn btn-danger" value="취소">
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<a href="/" class="btn btn-outline-success">돌아가기</a>
 </body>
 </html>

@@ -97,6 +97,16 @@ public class MemberDao {
 		
 	}
 
+	public void deleteseat(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		sqltemplate.delete("member.deleteseat",map);
+	}
+
+	public void deletestatus(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		sqltemplate.delete("member.deletestatus",map);
+	}
+
 	
 
 }

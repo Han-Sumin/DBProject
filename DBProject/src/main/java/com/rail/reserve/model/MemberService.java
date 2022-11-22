@@ -43,4 +43,8 @@ public interface MemberService {
 
 	void updatepay(Map<String, Object> map);
 
+	void deleteseat(Map<String, Object> map);
+
+	void deletestatus(Map<String, Object> map);
+
 }

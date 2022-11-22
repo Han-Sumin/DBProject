@@ -114,6 +114,18 @@ public class MemberServiceImpl implements MemberService {
 		dao.updatepay(map);
 	}
 
+	@Override
+	public void deleteseat(Map<String, Object> map) {
+		dao.deleteseat(map);
+		
+	}
+
+	@Override
+	public void deletestatus(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		dao.deletestatus(map);
+	}
+
 	
 
 

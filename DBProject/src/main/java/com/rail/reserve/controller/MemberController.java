@@ -208,4 +208,14 @@ public class MemberController {
 		return mav;
 
 	}
+	@RequestMapping(value = "/deletereserve", method = RequestMethod.POST)
+	public ModelAndView deletereserve(@RequestParam Map<String, Object> map, @ModelAttribute ReserveVO vo) {
+		ModelAndView mav = new ModelAndView();
+		String member_id = vo.getMEMBER_ID();
+		service.deleteseat(map);
+		service.deletestatus(map);
+		mav.setViewName("redirect:/reservelists?MEMBER_ID="+member_id);
+		return mav;
+
+	}
 }
