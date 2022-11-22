@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rail.reserve.model.ReserveService;
 import com.rail.reserve.vo.ReserveVO;
 import com.rail.reserve.vo.ReservedSeatVO;
+import com.rail.reserve.vo.ScheduleVO;
 import com.rail.reserve.vo.TrainSeatVO;
 
 @Controller
@@ -51,11 +52,12 @@ public class ReserveController {
 		int num = Math.abs(start_num - arrival_num);
 		vo.setPRICE(num * 1000);
 		service.reservestatus(vo);
-		int reserve_id = service.getreserveid(vo);
-		vo.setRESERVE_ID(reserve_id);
+		System.out.println(vo.getRESERVE_ID());
+//		int reserve_id = service.getreserveid(vo);
+//		vo.setRESERVE_ID(reserve_id);
 		String train_id = request.getParameter("TRAIN_ID");
 		String member_id = vo.getMEMBER_ID();
-		mav.setViewName("redirect:/reserve/reserveseat?RESERVE_ID=" + reserve_id + "&&TRAIN_ID=" + train_id
+		mav.setViewName("redirect:/reserve/reserveseat?RESERVE_ID="+vo.getRESERVE_ID() + "&&TRAIN_ID=" + train_id
 				+ "&&TRAIN_NUM=1&&MEMBER_ID=" + member_id);
 		return mav;
 	}
@@ -109,7 +111,7 @@ public class ReserveController {
 				mav.setViewName(
 						"redirect:/pay?MEMBER_ID=" + member_id + "&&RESERVE_ID=" + RESERVE_ID + "&&START_STATION="
 								+ start + "&&ARRIVAL_STATION=" + end + "&&TRAIN_ID=" + train_id + "&&COST=" + cost);
-			}else {
+			} else {
 				service.delete(RESERVE_ID);
 				mav.setViewName("redirect:/reserve/reserve_fail?MEMBER_ID=" + member_id);
 			}
@@ -140,6 +142,17 @@ public class ReserveController {
 	@RequestMapping(value = "/reserve/reserve_fail", method = RequestMethod.GET)
 	public ModelAndView reserve_fail(@RequestParam String MEMBER_ID) {
 		ModelAndView mav = new ModelAndView("reserve/reserve_fail");
+		return mav;
+	}
+
+	@RequestMapping(value = "/reserve/search", method = RequestMethod.GET)
+	public ModelAndView search(@RequestParam Map<String, Object> map, @ModelAttribute ScheduleVO vo,
+			HttpServletRequest request) {
+		vo.setSTATION_ID(request.getParameter("START_STATION"));
+		ModelAndView mav = new ModelAndView("reserve/search");
+
+		List<ScheduleVO> lists = service.search(vo);
+		mav.addObject("lists", lists);
 		return mav;
 	}
 

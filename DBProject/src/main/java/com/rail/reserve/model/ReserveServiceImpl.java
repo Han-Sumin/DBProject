@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.rail.reserve.dao.ReserveDao;
 import com.rail.reserve.vo.ReserveVO;
 import com.rail.reserve.vo.ReservedSeatVO;
+import com.rail.reserve.vo.ScheduleVO;
 
 @Service
 public class ReserveServiceImpl implements ReserveService {
@@ -79,6 +80,12 @@ public class ReserveServiceImpl implements ReserveService {
 	public void delete(int RESERVE_ID) {
 		// TODO Auto-generated method stub
 		dao.delete(RESERVE_ID);
+	}
+
+	@Override
+	public List<ScheduleVO> search(ScheduleVO vo) {
+		// TODO Auto-generated method stub
+		return dao.search(vo);
 	}
 
 }

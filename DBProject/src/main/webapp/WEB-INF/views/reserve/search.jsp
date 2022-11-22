@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>열차 등록</title>
+<title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
@@ -14,26 +14,28 @@
 		<thead>
 			<tr class="table-light">
 				<th scope="col" style="text-align: center;">#</th>
-				<th scope="col" style="text-align: center;">열차번호</th>
 				<th scope="col" style="text-align: center;">열차등급</th>
+				<th scope="col" style="text-align: center;">방향</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${lists}" var="data" varStatus="status">
 				<tr>
 					<td style="vertical-align: middle; text-align: center;">${status.count}</td>
-					<td style="vertical-align: middle; text-align: center;">${data.TRAIN_ID}</td>
 					<td style="vertical-align: middle; text-align: center;">${data.TRAIN_NAME}</td>
+					<td style="vertical-align: middle; text-align: center;">${data.DIRECTION}</td>
+
+
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<h2 align="center">열차 등록</h2>
-	<form action="/admin/addTrain" method="post">
-	<input class="form-control" type="text" name="TRAIN_ID" placeholder="열차번호" aria-label="default input example">
-	<input class="form-control" type="text" name="TRAIN_NAME" placeholder="열차등급" aria-label="default input example">
-	<input type="submit" class="btn btn-outline-secondary" value="등록">
-	</form>
-	<a href="/admin" class="btn btn-outline-success">돌아가기</a>
+	<%
+	String member_id = request.getParameter("MEMBER_ID");
+	%>
+	<c:url value="/reserve" var="url">
+		<c:param name="MEMBER_ID" value="<%=member_id%>"></c:param>
+	</c:url>
+	<a href="${url} " class="btn btn-outline-success">돌아가기</a>
 </body>
 </html>

@@ -35,6 +35,7 @@
 					<td style="vertical-align: middle; text-align: center;"><form
 							action="/updatepay" method="post">
 							<input type="hidden" name="MEMBER_ID" value="${data.MEMBER_ID}">
+							<input type="hidden" name="RESERVE_ID" value="${data.RESERVE_ID}">
 							<select name="PAY_METHOD" class="form-select" aria-label="결제방법선택">
 								<option selected>${data.PAY_METHOD}</option>
 								<option value="카드">카드</option>

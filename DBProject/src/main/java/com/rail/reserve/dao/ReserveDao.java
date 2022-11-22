@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rail.reserve.vo.ReserveVO;
 import com.rail.reserve.vo.ReservedSeatVO;
+import com.rail.reserve.vo.ScheduleVO;
 
 @Repository
 public class ReserveDao {
@@ -68,6 +69,12 @@ public class ReserveDao {
 	public void delete(int RESERVE_ID) {
 		// TODO Auto-generated method stub
 		sqltemplate.delete("reserve.delete",RESERVE_ID);
+	}
+
+
+	public List<ScheduleVO> search(ScheduleVO vo) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectList("reserve.search",vo);
 	}
 
 

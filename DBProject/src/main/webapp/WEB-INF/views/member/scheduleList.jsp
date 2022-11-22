@@ -44,7 +44,10 @@
 			name="DIRECTION" aria-label="방향선택">
 			<option value="상행">상행</option>
 			<option value="하행">하행</option>
-		</select> <input type="submit" class="btn btn-outline-secondary" value="등록">
+		</select> 
+		<br>
+		<input type="submit" class="btn btn-outline-secondary" value="등록">
+		<a href="/admin" class="btn btn-outline-success">돌아가기</a>
 	</form>
 </body>
 </html>

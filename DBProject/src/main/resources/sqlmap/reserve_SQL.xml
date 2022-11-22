@@ -3,9 +3,14 @@
 
 <mapper namespace="reserve">
 	<insert id="reservestatus" parameterType="hashmap">
+
 		insert into
 		RESERVED_STATUS
 		values(SEQ.nextval,#{MEMBER_ID},#{START_STATION},#{ARRIVAL_STATION},SYSDATE,#{PRICE},#{PAY_METHOD})
+		<selectKey keyProperty="RESERVE_ID" order="AFTER"
+			resultType="int">
+			select seq.currval from dual
+		</selectKey>
 	</insert>
 
 	<select id="seatlists" parameterType="hashMap"
@@ -60,7 +65,16 @@
 	</select>
 
 	<delete id="delete">
-		delete from RESERVED_STATUS where RESERVE_ID = #{RESERVE_ID}
+		delete from RESERVED_STATUS where RESERVE_ID =
+		#{RESERVE_ID}
 	</delete>
+
+	<select id="search" parameterType="hashMap" resultType="hashMap">
+		select
+		t.TRAIN_NAME,s.DIRECTION
+		from train t, schedule s
+		where s.STATION_ID =
+		#{STATION_ID} and s.DIRECTION = #{DIRECTION}
+	</select>
 
 </mapper>

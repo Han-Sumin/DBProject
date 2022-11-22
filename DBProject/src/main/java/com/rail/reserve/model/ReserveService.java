@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rail.reserve.vo.ReserveVO;
 import com.rail.reserve.vo.ReservedSeatVO;
+import com.rail.reserve.vo.ScheduleVO;
 import com.rail.reserve.vo.TrainSeatVO;
 
 public interface ReserveService {
@@ -40,6 +41,9 @@ public interface ReserveService {
 
 
 	void delete(int RESERVE_ID);
+
+
+	List<ScheduleVO> search(ScheduleVO vo);
 
 
 
