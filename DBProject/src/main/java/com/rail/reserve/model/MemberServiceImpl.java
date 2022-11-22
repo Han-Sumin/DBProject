@@ -20,18 +20,6 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao dao;
 
 	@Override
-	public boolean join(Map<String, Object> map) {
-		int result = dao.join(map);	
-		return result == 1;
-	}
-
-	@Override
-	public Map<String, Object> loginCheck(Map<String, Object> map) {
-		Map<String, Object> name = dao.loginCheck(map);
-		return name;
-	}
-
-	@Override
 	public void logout(HttpSession session) {
 		session.invalidate();
 	}
@@ -45,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void update(Map<String, Object> map) {
 		dao.gradeUpdate(map);
-		
+
 	}
 
 	@Override
@@ -57,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void addTrain(Map<String, Object> map) {
 		dao.addTrain(map);
-		
+
 	}
 
 	@Override
@@ -69,7 +57,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void addSchedule(Map<String, Object> map) {
 		dao.addSchedule(map);
-		
+
 	}
 
 	@Override
@@ -81,25 +69,25 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void nameupdate(Map<String, Object> map) {
 		dao.nameupdate(map);
-		
+
 	}
 
 	@Override
 	public void phoneupdate(Map<String, Object> map) {
 		dao.phoneupdate(map);
-		
+
 	}
 
 	@Override
 	public void cardupdate(Map<String, Object> map) {
 		dao.cardupdate(map);
-		
+
 	}
 
 	@Override
 	public void deletemember(Map<String, Object> map) {
 		dao.deletemember(map);
-		
+
 	}
 
 	@Override
@@ -117,7 +105,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void deleteseat(Map<String, Object> map) {
 		dao.deleteseat(map);
-		
+
 	}
 
 	@Override
@@ -126,9 +114,18 @@ public class MemberServiceImpl implements MemberService {
 		dao.deletestatus(map);
 	}
 
-	
+	@Override
+	public boolean join(MemberVO vo) {
+		// TODO Auto-generated method stub
+		int result = dao.join(vo);
+		return result == 1;
+	}
 
-
-
+	@Override
+	public Map<String, Object> loginCheck(MemberVO vo) {
+		// TODO Auto-generated method stub
+		Map<String, Object> name = dao.loginCheck(vo);
+		return name;
+	}
 
 }

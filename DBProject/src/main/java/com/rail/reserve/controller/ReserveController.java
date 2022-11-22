@@ -46,7 +46,6 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 		String start = vo.getSTART_STATION();
 		String arrival = vo.getARRIVAL_STATION();
-		Date date = new Date();
 		int start_num = Integer.parseInt(start);
 		int arrival_num = Integer.parseInt(arrival);
 		int num = Math.abs(start_num - arrival_num);

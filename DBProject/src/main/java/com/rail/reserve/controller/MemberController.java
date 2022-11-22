@@ -1,5 +1,6 @@
 package com.rail.reserve.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 
@@ -35,10 +36,15 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public ModelAndView join(@RequestParam Map<String, Object> map) {
+	public ModelAndView join(@RequestParam Map<String, Object> map, @ModelAttribute MemberVO vo) throws NoSuchAlgorithmException {
+		SHA256 sha256 = new SHA256();
 		try {
 			ModelAndView mav = new ModelAndView();
-			boolean isCreated = service.join(map);
+			String psw = sha256.encrypt(vo.getPASSWORD());
+			vo.setPASSWORD(psw);
+			System.out.println(vo.getMEMBER_ID());
+			System.out.println(vo.getPASSWORD());
+			boolean isCreated = service.join(vo);
 			if (isCreated) {
 				mav.setViewName("redirect:/");
 			} else {
@@ -57,9 +63,12 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam Map<String, Object> map, HttpSession session, @ModelAttribute MemberVO vo) {
+	public ModelAndView login(@RequestParam Map<String, Object> map, HttpSession session, @ModelAttribute MemberVO vo) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView("reserve/reserve");
-		Map<String, Object> result = service.loginCheck(map);
+		SHA256 sha256 = new SHA256();
+		String psw = sha256.encrypt(vo.getPASSWORD());
+		vo.setPASSWORD(psw);
+		Map<String, Object> result = service.loginCheck(vo);
 		if (result != null) {
 			mav.addObject("member", result);
 			session.setAttribute("member", result);

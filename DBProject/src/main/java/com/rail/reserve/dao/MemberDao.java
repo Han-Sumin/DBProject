@@ -19,11 +19,6 @@ public class MemberDao {
 	@Autowired
 	SqlSessionTemplate sqltemplate;
 
-	public int join(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return sqltemplate.insert("member.insert", map);
-	}
-
 	public Map<String, Object> loginCheck(Map<String, Object> map) {
 		return sqltemplate.selectOne("member.login", map);
 	}
@@ -105,6 +100,16 @@ public class MemberDao {
 	public void deletestatus(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		sqltemplate.delete("member.deletestatus",map);
+	}
+
+	public int join(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return sqltemplate.insert("member.insert", vo);
+	}
+
+	public Map<String, Object> loginCheck(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectOne("member.login", vo);
 	}
 
 	

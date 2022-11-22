@@ -11,9 +11,7 @@ import com.rail.reserve.vo.TrainVO;
 
 public interface MemberService {
 
-	boolean join(Map<String, Object> map);
 
-	public Map<String, Object> loginCheck(Map<String, Object> map);
 
 	public void logout(HttpSession session);
 
@@ -46,5 +44,9 @@ public interface MemberService {
 	void deleteseat(Map<String, Object> map);
 
 	void deletestatus(Map<String, Object> map);
+
+	boolean join(MemberVO vo);
+
+	public Map<String, Object> loginCheck(MemberVO vo);
 
 }
