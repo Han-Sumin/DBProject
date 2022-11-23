@@ -39,7 +39,6 @@ public interface MemberService {
 
 	List<ReserveVO> reservelists(String MEMBER_ID);
 
-	void updatepay(Map<String, Object> map);
 
 	void deleteseat(Map<String, Object> map);
 

@@ -96,11 +96,6 @@ public class MemberServiceImpl implements MemberService {
 		return dao.reservelists(MEMBER_ID);
 	}
 
-	@Override
-	public void updatepay(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		dao.updatepay(map);
-	}
 
 	@Override
 	public void deleteseat(Map<String, Object> map) {

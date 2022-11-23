@@ -52,7 +52,9 @@
 			<option value="11:00">11:00</option>
 			<option value="12:00">12:00</option>
 			<option value="1:00">1:00</option>
-		</select> <input type="submit" class="btn btn-outline-secondary" value="등록">
+		</select> 
+		<br>
+		<input type="submit" class="btn btn-outline-secondary" value="등록">
 		<a href="/admin" class="btn btn-outline-success">돌아가기</a>
 	</form>
 </body>

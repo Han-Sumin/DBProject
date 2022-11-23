@@ -69,11 +69,6 @@
 		select * from RESERVED_STATUS where MEMBER_ID =
 		#{MEMBER_ID}
 	</select>
-	<update id="updatepay">
-		update RESERVED_STATUS set PAY_METHOD = #{PAY_METHOD}
-		where MEMBER_ID =
-		#{MEMBER_ID} and RESERVE_ID = #{RESERVE_ID}
-	</update>
 	<delete id="deleteseat">
 		delete from RESERVED_SEAT where RESERVE_ID =
 		#{RESERVE_ID}

@@ -32,17 +32,7 @@
 					<td style="vertical-align: middle; text-align: center;">${data.START_STATION}</td>
 					<td style="vertical-align: middle; text-align: center;">${data.ARRIVAL_STATION}</td>
 					<td style="vertical-align: middle; text-align: center;">${data.RESERVE_DATE}</td>
-					<td style="vertical-align: middle; text-align: center;"><form
-							action="/updatepay" method="post">
-							<input type="hidden" name="MEMBER_ID" value="${data.MEMBER_ID}">
-							<input type="hidden" name="RESERVE_ID" value="${data.RESERVE_ID}">
-							<select name="PAY_METHOD" class="form-select" aria-label="결제방법선택">
-								<option selected>${data.PAY_METHOD}</option>
-								<option value="카드">카드</option>
-								<option value="계좌이체">계좌이체</option>
-							</select> <input type="submit" class="btn btn-outline-secondary"
-								value="수정">
-						</form></td>
+					<td style="vertical-align: middle; text-align: center;">${data.PAY_METHOD}</td>
 					<td style="vertical-align: middle; text-align: center;">
 						<form action="/deletereserve" method="post">
 							<input type="hidden" name="MEMBER_ID" value="${data.MEMBER_ID}">
@@ -55,8 +45,8 @@
 		</tbody>
 	</table>
 	<c:url value="/reserve" var="url">
-	<c:param name="MEMBER_ID" value="<%=member_id%>"></c:param>
+		<c:param name="MEMBER_ID" value="<%=member_id%>"></c:param>
 	</c:url>
-	<a href="${url }" class = " btn btn-outline-success">돌아가기</a>
+	<a href="${url }" class=" btn btn-outline-success">돌아가기</a>
 </body>
 </html>

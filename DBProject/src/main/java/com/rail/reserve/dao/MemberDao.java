@@ -87,11 +87,6 @@ public class MemberDao {
 		return sqltemplate.selectList("member.reservelists",MEMBER_ID);
 	}
 
-	public void updatepay(Map<String, Object> map) {
-		sqltemplate.update("member.updatepay",map);
-		
-	}
-
 	public void deleteseat(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		sqltemplate.delete("member.deleteseat",map);

@@ -220,15 +220,6 @@ public class MemberController {
 
 	}
 
-	@RequestMapping(value = "/updatepay", method = RequestMethod.POST)
-	public ModelAndView updatepay(@RequestParam Map<String, Object> map, @ModelAttribute ReserveVO vo) {
-		ModelAndView mav = new ModelAndView();
-		String member_id = vo.getMEMBER_ID();
-		service.updatepay(map);
-		mav.setViewName("redirect:/reservelists?MEMBER_ID=" + member_id);
-		return mav;
-
-	}
 
 	@RequestMapping(value = "/deletereserve", method = RequestMethod.POST)
 	public ModelAndView deletereserve(@RequestParam Map<String, Object> map, @ModelAttribute ReserveVO vo) {

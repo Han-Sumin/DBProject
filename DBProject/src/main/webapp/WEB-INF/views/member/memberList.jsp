@@ -52,6 +52,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<a href="/" class="btn btn-outline-success">돌아가기</a>
+	<a href="/admin" class="btn btn-outline-success">돌아가기</a>
 </body>
 </html>

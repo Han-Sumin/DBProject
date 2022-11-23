@@ -52,12 +52,9 @@ public class ReserveController {
 		int num = Math.abs(start_num - arrival_num);
 		vo.setPRICE(num * 1000);
 		service.reservestatus(vo);
-		System.out.println(vo.getRESERVE_ID());
-//		int reserve_id = service.getreserveid(vo);
-//		vo.setRESERVE_ID(reserve_id);
 		String train_id = request.getParameter("TRAIN_ID");
 		String member_id = vo.getMEMBER_ID();
-		mav.setViewName("redirect:/reserve/reserveseat?RESERVE_ID="+vo.getRESERVE_ID() + "&&TRAIN_ID=" + train_id
+		mav.setViewName("redirect:/reserve/reserveseat?RESERVE_ID=" + vo.getRESERVE_ID() + "&&TRAIN_ID=" + train_id
 				+ "&&TRAIN_NUM=1&&MEMBER_ID=" + member_id);
 		return mav;
 	}
@@ -76,14 +73,17 @@ public class ReserveController {
 	}
 
 	@RequestMapping(value = "/reserve/reserveseat", method = RequestMethod.POST)
-	public ModelAndView reserveseat(@RequestParam Map<String, Object> map, @ModelAttribute ReservedSeatVO vo,
-			HttpServletRequest request) {
+	public ModelAndView reserveseat(@RequestParam Map<String, Object> map, 
+			@ModelAttribute ReservedSeatVO vo,
+			@RequestParam(value="SEAT_NUM", required=false) String[] seats
+			,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		int RESERVE_ID = vo.getRESERVE_ID();
 		String train_id = vo.getTRAIN_ID();
 		String start = service.start(RESERVE_ID);
 		String end = service.end(RESERVE_ID);
 		String member_id = request.getParameter("MEMBER_ID");
+		int seat_count = seats.length;
 		int max = 0;
 		int min = 0;
 		int start_num = Integer.parseInt(start);
@@ -92,26 +92,27 @@ public class ReserveController {
 		map3.put("TRAIN_ID", train_id);
 		map3.put("START_STATION", start);
 		map3.put("ARRIVAL_STATION", end);
-		String cost = service.cost(map3);
+		String strcost = service.cost(map3);
+		int cost = Integer.parseInt(strcost);
+		cost = cost * seat_count;
 		if (start_num > end_num) {
 			max = start_num;
 			min = end_num;
-			vo.setDIRECTION("ªÛ«‡");
+			vo.setDIRECTION("ÏÉÅÌñâ");
 		} else {
 			max = end_num;
 			min = start_num;
-			vo.setDIRECTION("«œ«‡");
+			vo.setDIRECTION("ÌïòÌñâ");
 		}
 		for (int i = min; i <= max; i++) {
+			for(int number = 0; number<seats.length; number++) {
 			String j = String.valueOf(i);
 			vo.setSTATION_ID(j);
+			vo.setSEAT_NUM(seats[number]);
 			String TIME = service.timeget(vo);
 			vo.setTIME(TIME);
 			int count = service.count(vo);
-			System.out.println(count);
 			if (count == 0) {
-				System.out.println(vo.getSTATION_ID());
-				System.out.println(vo.getTIME());
 				service.insertseat(vo);
 				mav.setViewName(
 						"redirect:/pay?MEMBER_ID=" + member_id + "&&RESERVE_ID=" + RESERVE_ID + "&&START_STATION="
@@ -119,6 +120,7 @@ public class ReserveController {
 			} else {
 				service.delete(RESERVE_ID);
 				mav.setViewName("redirect:/reserve/reserve_fail?MEMBER_ID=" + member_id);
+			}
 			}
 
 		}
