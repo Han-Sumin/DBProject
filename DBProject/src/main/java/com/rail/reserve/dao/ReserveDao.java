@@ -36,11 +36,6 @@ public class ReserveDao {
 		return sqltemplate.selectOne("reserve.start", RESERVE_ID);
 	}
 
-	public int getreserveid(ReserveVO vo) {
-		// TODO Auto-generated method stub
-		return sqltemplate.selectOne("reserve.getreserveid",vo);
-	}
-
 	public String end(int RESERVE_ID) {
 		// TODO Auto-generated method stub
 		return sqltemplate.selectOne("reserve.end",RESERVE_ID);
@@ -75,6 +70,11 @@ public class ReserveDao {
 	public List<ScheduleVO> search(ScheduleVO vo) {
 		// TODO Auto-generated method stub
 		return sqltemplate.selectList("reserve.search",vo);
+	}
+
+	public String timeget(ReservedSeatVO vo) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectOne("reserve.gettime",vo);
 	}
 
 

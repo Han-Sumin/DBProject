@@ -36,7 +36,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public ModelAndView join(@RequestParam Map<String, Object> map, @ModelAttribute MemberVO vo) throws NoSuchAlgorithmException {
+	public ModelAndView join(@RequestParam Map<String, Object> map, @ModelAttribute MemberVO vo)
+			throws NoSuchAlgorithmException {
 		SHA256 sha256 = new SHA256();
 		try {
 			ModelAndView mav = new ModelAndView();
@@ -61,11 +62,13 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam Map<String, Object> map, HttpSession session, @ModelAttribute MemberVO vo) throws NoSuchAlgorithmException {
+	public ModelAndView login(@RequestParam Map<String, Object> map, HttpSession session, @ModelAttribute MemberVO vo)
+			throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView("reserve/reserve");
 		SHA256 sha256 = new SHA256();
 		String psw = sha256.encrypt(vo.getPASSWORD());
 		vo.setPASSWORD(psw);
+		String state = service.state(vo);
 		Map<String, Object> result = service.loginCheck(vo);
 		if (result != null) {
 			mav.addObject("member", result);
@@ -74,7 +77,12 @@ public class MemberController {
 			if (member_id.equals("admin")) {
 				mav.setViewName("redirect:/admin");
 			} else {
-				mav.setViewName("redirect:/reserve?MEMBER_ID=" + member_id);
+				if (state.equals("미승인")) {
+					mav.addObject("msg","승인되지 않은 회원");
+					mav.setViewName("redirect:/");
+				} else {
+					mav.setViewName("redirect:/reserve?MEMBER_ID=" + member_id);
+				}
 			}
 			session.setAttribute("member", result);
 
@@ -166,6 +174,7 @@ public class MemberController {
 		return mav;
 
 	}
+
 	@RequestMapping(value = "/phoneUpdate", method = RequestMethod.POST)
 	public ModelAndView phoneupdate(@RequestParam Map<String, Object> map, @ModelAttribute MemberVO vo) {
 		ModelAndView mav = new ModelAndView();
@@ -175,6 +184,7 @@ public class MemberController {
 		return mav;
 
 	}
+
 	@RequestMapping(value = "/cardUpdate", method = RequestMethod.POST)
 	public ModelAndView cardupdate(@RequestParam Map<String, Object> map, @ModelAttribute MemberVO vo) {
 		ModelAndView mav = new ModelAndView();
@@ -184,12 +194,14 @@ public class MemberController {
 		return mav;
 
 	}
+
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete() {
 		ModelAndView mav = new ModelAndView("member/delete");
 		return mav;
 
 	}
+
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public ModelAndView delete(@RequestParam Map<String, Object> map) {
 		ModelAndView mav = new ModelAndView();
@@ -198,6 +210,7 @@ public class MemberController {
 		return mav;
 
 	}
+
 	@RequestMapping(value = "/reservelists", method = RequestMethod.GET)
 	public ModelAndView reservelists(@RequestParam String MEMBER_ID) {
 		List<ReserveVO> lists = service.reservelists(MEMBER_ID);
@@ -206,23 +219,33 @@ public class MemberController {
 		return mav;
 
 	}
+
 	@RequestMapping(value = "/updatepay", method = RequestMethod.POST)
 	public ModelAndView updatepay(@RequestParam Map<String, Object> map, @ModelAttribute ReserveVO vo) {
 		ModelAndView mav = new ModelAndView();
 		String member_id = vo.getMEMBER_ID();
 		service.updatepay(map);
-		mav.setViewName("redirect:/reservelists?MEMBER_ID="+member_id);
+		mav.setViewName("redirect:/reservelists?MEMBER_ID=" + member_id);
 		return mav;
 
 	}
+
 	@RequestMapping(value = "/deletereserve", method = RequestMethod.POST)
 	public ModelAndView deletereserve(@RequestParam Map<String, Object> map, @ModelAttribute ReserveVO vo) {
 		ModelAndView mav = new ModelAndView();
 		String member_id = vo.getMEMBER_ID();
 		service.deleteseat(map);
 		service.deletestatus(map);
-		mav.setViewName("redirect:/reservelists?MEMBER_ID="+member_id);
+		mav.setViewName("redirect:/reservelists?MEMBER_ID=" + member_id);
 		return mav;
 
+	}
+	@RequestMapping(value = "/updateState", method = RequestMethod.POST)
+	public ModelAndView updatestate(@RequestParam String MEMBER_ID, @ModelAttribute MemberVO vo) {
+		ModelAndView mav = new ModelAndView();
+		service.updatestate(vo.getMEMBER_ID());
+		mav.setViewName("redirect:/admin");
+		return mav;
+		
 	}
 }

@@ -105,8 +105,13 @@ public class ReserveController {
 		for (int i = min; i <= max; i++) {
 			String j = String.valueOf(i);
 			vo.setSTATION_ID(j);
+			String TIME = service.timeget(vo);
+			vo.setTIME(TIME);
 			int count = service.count(vo);
+			System.out.println(count);
 			if (count == 0) {
+				System.out.println(vo.getSTATION_ID());
+				System.out.println(vo.getTIME());
 				service.insertseat(vo);
 				mav.setViewName(
 						"redirect:/pay?MEMBER_ID=" + member_id + "&&RESERVE_ID=" + RESERVE_ID + "&&START_STATION="

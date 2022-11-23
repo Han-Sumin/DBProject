@@ -20,6 +20,7 @@
 				<th scope="col" style="text-align: center;">전화번호</th>
 				<th scope="col" style="text-align: center;">등급</th>
 				<th scope="col" style="text-align: center;">카드번호</th>
+				<th scope="col" style="text-align: center;">승인상태</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,8 +40,14 @@
 							</select> <input type="hidden" name="MEMBER_ID" value="${data.MEMBER_ID}">
 							<input type="submit" class="btn btn-outline-secondary" value="수정">
 						</form>
-					</td>
 					<td style="vertical-align: middle; text-align: center;">${data.CARD}</td>
+					<td style="vertical-align: middle; text-align: center;">
+						${data.STATE}
+						<form action="/updateState" method="post">
+							<input type="hidden" name="MEMBER_ID" value="${data.MEMBER_ID}">
+							<input type="submit" name = "STATE" class="btn btn-outline-secondary" value="승인">
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

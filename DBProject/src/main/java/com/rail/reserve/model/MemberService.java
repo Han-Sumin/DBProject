@@ -49,4 +49,9 @@ public interface MemberService {
 
 	public Map<String, Object> loginCheck(MemberVO vo);
 
+	public void updatestate(String MEMBER_ID);
+
+
+	public String state(MemberVO vo);
+
 }

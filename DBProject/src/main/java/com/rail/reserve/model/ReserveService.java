@@ -22,7 +22,6 @@ public interface ReserveService {
 	String start(int RESERVE_ID);
 
 
-	int getreserveid(ReserveVO vo);
 
 
 	String end(int RESERVE_ID);
@@ -44,6 +43,9 @@ public interface ReserveService {
 
 
 	List<ScheduleVO> search(ScheduleVO vo);
+
+
+	String timeget(ReservedSeatVO vo);
 
 
 

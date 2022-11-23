@@ -11,11 +11,14 @@ public class MemberVO {
 	private String GRADE;
 	private String CARD;
 	private String FLAG;
+	private String STATE;
 	@Override
 	public String toString() {
 		return "MemberVO [MEMBER_ID=" + MEMBER_ID + ", PASSWORD=" + PASSWORD + ", NAME=" + NAME + ", PHONE=" + PHONE
-				+ ", GRADE=" + GRADE + ", CARD=" + CARD + ", FLAG=" + FLAG + "]";
+				+ ", GRADE=" + GRADE + ", CARD=" + CARD + ", FLAG=" + FLAG + ", STATE=" + STATE + "]";
 	}
+	
+	
 	
 	
 	

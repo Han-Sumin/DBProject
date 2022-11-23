@@ -40,11 +40,6 @@ public class ReserveServiceImpl implements ReserveService {
 		return dao.start(RESERVE_ID);
 	}
 
-	@Override
-	public int getreserveid(ReserveVO vo) {
-		// TODO Auto-generated method stub
-		return dao.getreserveid(vo);
-	}
 
 	@Override
 	public String end(int RESERVE_ID) {
@@ -86,6 +81,12 @@ public class ReserveServiceImpl implements ReserveService {
 	public List<ScheduleVO> search(ScheduleVO vo) {
 		// TODO Auto-generated method stub
 		return dao.search(vo);
+	}
+
+	@Override
+	public String timeget(ReservedSeatVO vo) {
+		// TODO Auto-generated method stub
+		return dao.timeget(vo);
 	}
 
 }

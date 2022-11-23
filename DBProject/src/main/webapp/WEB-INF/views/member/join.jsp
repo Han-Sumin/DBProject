@@ -13,6 +13,7 @@
 		<form name="join" class="form-horizontal" method="post"
 			onsubmit="return checkForm()">
 			<input type="hidden" name="GRADE" value="SILVER">
+			<input type="hidden" name="STATE" value="미승인">
 			<div class="mb-3">
 				<label class="form-label ">아이디</label>
 				<div class="form-control">

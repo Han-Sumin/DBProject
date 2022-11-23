@@ -112,6 +112,16 @@ public class MemberDao {
 		return sqltemplate.selectOne("member.login", vo);
 	}
 
+	public void updatestate(String MEMBER_ID) {
+		sqltemplate.update("member.updatestate",MEMBER_ID);
+		
+	}
+
+	public String state(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return sqltemplate.selectOne("member.state",vo);
+	}
+
 	
 
 }

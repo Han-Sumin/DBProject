@@ -16,6 +16,7 @@
 				<th scope="col" style="text-align: center;">#</th>
 				<th scope="col" style="text-align: center;">열차등급</th>
 				<th scope="col" style="text-align: center;">방향</th>
+				<th scope="col" style="text-align: center;">시간</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -24,7 +25,7 @@
 					<td style="vertical-align: middle; text-align: center;">${status.count}</td>
 					<td style="vertical-align: middle; text-align: center;">${data.TRAIN_NAME}</td>
 					<td style="vertical-align: middle; text-align: center;">${data.DIRECTION}</td>
-
+					<td style="vertical-align: middle; text-align: center;">${data.TIME}</td>
 
 				</tr>
 			</c:forEach>

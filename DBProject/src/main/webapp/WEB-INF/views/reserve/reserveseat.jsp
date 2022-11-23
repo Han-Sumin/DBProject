@@ -33,6 +33,13 @@
 		<input type="hidden" name="TRAIN_NUM" value="<%=train_num%>">
 		<input type="hidden" name="TRAIN_ID" value="<%=train_id%>"> <input
 			type="hidden" name="MEMBER_ID" value="<%=member_id%>">
+			<select name="TIME" aria-label="시간선택" class="selectpicker">
+				<option value="9:00">9:00</option>
+				<option value="10:00">10:00</option>
+				<option value="11:00">11:00</option>
+				<option value="12:00">12:00</option>
+				<option value="1:00">1:00</option>
+			</select>
 		<c:forEach items="${lists}" var="data">
 			<div class="d-grid gap-2 col-6 mx-auto">
 				<button class="btn btn-secondary" type="submit" name="SEAT_NUM"

@@ -128,4 +128,16 @@ public class MemberServiceImpl implements MemberService {
 		return name;
 	}
 
+	@Override
+	public void updatestate(String MEMBER_ID) {
+		// TODO Auto-generated method stub
+		dao.updatestate(MEMBER_ID);
+	}
+
+	@Override
+	public String state(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return dao.state(vo);
+	}
+
 }
