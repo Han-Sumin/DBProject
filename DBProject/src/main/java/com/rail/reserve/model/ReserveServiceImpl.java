@@ -89,4 +89,12 @@ public class ReserveServiceImpl implements ReserveService {
 		return dao.timeget(vo);
 	}
 
+	@Override
+	public void updateprice(Map<String, Object> map) {
+		dao.updateprice(map);
+		
+	}
+
+
+
 }

@@ -22,6 +22,7 @@
 				<th scope="col" style="text-align: center;">도착역</th>
 				<th scope="col" style="text-align: center;">예약날짜</th>
 				<th scope="col" style="text-align: center;">결제방법</th>
+				<th scope="col" style="text-align: center;">가격</th>
 				<th scope="col" style="text-align: center;">취소</th>
 			</tr>
 		</thead>
@@ -33,6 +34,7 @@
 					<td style="vertical-align: middle; text-align: center;">${data.ARRIVAL_STATION}</td>
 					<td style="vertical-align: middle; text-align: center;">${data.RESERVE_DATE}</td>
 					<td style="vertical-align: middle; text-align: center;">${data.PAY_METHOD}</td>
+					<td style="vertical-align: middle; text-align: center;">${data.PRICE}</td>
 					<td style="vertical-align: middle; text-align: center;">
 						<form action="/deletereserve" method="post">
 							<input type="hidden" name="MEMBER_ID" value="${data.MEMBER_ID}">

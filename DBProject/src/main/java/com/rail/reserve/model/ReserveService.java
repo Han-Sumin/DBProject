@@ -47,6 +47,9 @@ public interface ReserveService {
 
 	String timeget(ReservedSeatVO vo);
 
+	void updateprice(Map<String, Object> map);
+
+
 
 
 

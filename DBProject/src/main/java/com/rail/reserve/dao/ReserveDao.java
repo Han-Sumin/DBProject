@@ -77,5 +77,10 @@ public class ReserveDao {
 		return sqltemplate.selectOne("reserve.gettime",vo);
 	}
 
+	public void updateprice(Map<String, Object> map) {
+		sqltemplate.update("reserve.updateprice",map);
+		
+	}
+
 
 }

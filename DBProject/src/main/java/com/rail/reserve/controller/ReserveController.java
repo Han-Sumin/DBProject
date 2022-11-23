@@ -7,9 +7,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rail.reserve.HomeController;
 import com.rail.reserve.model.ReserveService;
 import com.rail.reserve.vo.ReserveVO;
 import com.rail.reserve.vo.ReservedSeatVO;
@@ -27,6 +31,7 @@ import com.rail.reserve.vo.TrainSeatVO;
 public class ReserveController {
 	@Autowired
 	private ReserveService service;
+	private static final Logger logger = LoggerFactory.getLogger(ReserveController.class);
 
 	@RequestMapping(value = "/reserve", method = RequestMethod.GET)
 	public ModelAndView reserve(@RequestParam String MEMBER_ID) {
@@ -73,10 +78,8 @@ public class ReserveController {
 	}
 
 	@RequestMapping(value = "/reserve/reserveseat", method = RequestMethod.POST)
-	public ModelAndView reserveseat(@RequestParam Map<String, Object> map, 
-			@ModelAttribute ReservedSeatVO vo,
-			@RequestParam(value="SEAT_NUM", required=false) String[] seats
-			,HttpServletRequest request) {
+	public ModelAndView reserveseat(@RequestParam Map<String, Object> map, @ModelAttribute ReservedSeatVO vo,
+			@RequestParam(value = "SEAT_NUM", required = false) String[] seats, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		int RESERVE_ID = vo.getRESERVE_ID();
 		String train_id = vo.getTRAIN_ID();
@@ -105,39 +108,41 @@ public class ReserveController {
 			vo.setDIRECTION("하행");
 		}
 		for (int i = min; i <= max; i++) {
-			for(int number = 0; number<seats.length; number++) {
-			String j = String.valueOf(i);
-			vo.setSTATION_ID(j);
-			vo.setSEAT_NUM(seats[number]);
-			String TIME = service.timeget(vo);
-			vo.setTIME(TIME);
-			int count = service.count(vo);
-			if (count == 0) {
-				service.insertseat(vo);
-				mav.setViewName(
-						"redirect:/pay?MEMBER_ID=" + member_id + "&&RESERVE_ID=" + RESERVE_ID + "&&START_STATION="
-								+ start + "&&ARRIVAL_STATION=" + end + "&&TRAIN_ID=" + train_id + "&&COST=" + cost);
-			} else {
-				service.delete(RESERVE_ID);
-				mav.setViewName("redirect:/reserve/reserve_fail?MEMBER_ID=" + member_id);
-			}
+			for (int number = 0; number < seats.length; number++) {
+				String j = String.valueOf(i);
+				vo.setSTATION_ID(j);
+				vo.setSEAT_NUM(seats[number]);
+				String TIME = service.timeget(vo);
+				vo.setTIME(TIME);
+				int count = service.count(vo);
+				System.out.println(count);
+				if (count == 0) {
+					service.insertseat(vo);
+					mav.setViewName(
+							"redirect:/pay?MEMBER_ID=" + member_id + "&&RESERVE_ID=" + RESERVE_ID + "&&START_STATION="
+									+ start + "&&ARRIVAL_STATION=" + end + "&&TRAIN_ID=" + train_id + "&&PRICE=" + cost);
+				} else {
+					service.delete(RESERVE_ID);
+					mav.setViewName("redirect:/reserve/reserve_fail?MEMBER_ID=" + member_id);
+				}
 			}
 
 		}
 
-		return mav;
-
+return mav;
 	}
 
 	@RequestMapping(value = "/pay", method = RequestMethod.GET)
 	public ModelAndView reservelists(@RequestParam Map<String, Object> map, HttpServletRequest request) {
 		String member_id = request.getParameter("MEMBER_ID");
 		String reserve_id = request.getParameter("RESERVE_ID");
+		String cost = request.getParameter("COST");
 
 		Map<String, String> map2 = new HashMap<String, String>();
 		map2.put("RESERVE_ID", reserve_id);
 		map2.put("MEMBER_ID", member_id);
 		List<ReserveVO> lists = service.pay(map2);
+		service.updateprice(map);
 
 		ModelAndView mav = new ModelAndView("reserve/pay");
 
@@ -161,6 +166,14 @@ public class ReserveController {
 		List<ScheduleVO> lists = service.search(vo);
 		mav.addObject("lists", lists);
 		return mav;
+	}
+	
+	@ExceptionHandler(RuntimeException.class)
+	public String exceptionHandler(Model model, Exception e){
+	logger.info("exception : " + e.getMessage());
+	model.addAttribute("exception", e);
+	return "reserve/reserve_fail";
+
 	}
 
 }

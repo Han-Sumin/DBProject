@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%
-	String cost = request.getParameter("COST");
+	String PRICE = request.getParameter("PRICE");
 	%>
 	<h1 align="center"></h1>
 	<c:forEach items="${lists}" var="data">
@@ -28,7 +28,7 @@
 				<c:forEach items="${lists}" var="data" varStatus="status">
 					<tr>
 						<td style="vertical-align: middle; text-align: center;">${data.RESERVE_DATE}</td>
-						<td style="vertical-align: middle; text-align: center;"><%=cost%></td>
+						<td style="vertical-align: middle; text-align: center;"><%=PRICE%></td>
 						<td style="vertical-align: middle; text-align: center;">${data.PAY_METHOD}</td>
 					</tr>
 				</c:forEach>

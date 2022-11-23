@@ -22,24 +22,20 @@
 	int reserveId = Integer.parseInt(reserve_id);
 	%>
 
-
+<div align="center">
 	<a
 		href="/reserve/reserveseat?RESERVE_ID=<%=reserve_id%>&&TRAIN_ID=<%=train_id%>&&TRAIN_NUM=1&&MEMBER_ID=<%=member_id%>">1호차</a>
 	<a
 		href="/reserve/reserveseat?RESERVE_ID=<%=reserve_id%>&&TRAIN_ID=<%=train_id%>&&TRAIN_NUM=2&&MEMBER_ID=<%=member_id%>">2호차</a>
-
+</div>
+<br>
+<br>
+<br><div align="center">
 	<form action="/reserve/reserveseat" method="POST">
 		<input type="hidden" name="RESERVE_ID" value="<%=reserveId%>">
 		<input type="hidden" name="TRAIN_NUM" value="<%=train_num%>">
 		<input type="hidden" name="TRAIN_ID" value="<%=train_id%>"> <input
-			type="hidden" name="MEMBER_ID" value="<%=member_id%>"> <select
-			name="TIME" aria-label="시간선택" class="selectpicker">
-			<option value="9:00">9:00</option>
-			<option value="10:00">10:00</option>
-			<option value="11:00">11:00</option>
-			<option value="12:00">12:00</option>
-			<option value="1:00">1:00</option>
-		</select>
+			type="hidden" name="MEMBER_ID" value="<%=member_id%>">
 		<c:forEach items="${lists}" var="data">
 			<div class="d-grid gap-2 col-6 mx-auto">
 				<input class="btn-check" type="checkbox" name="SEAT_NUM"
@@ -47,7 +43,9 @@
 				<label class="btn btn-primary" for="btn-check">${data.SEAT_NUM}</label>
 			</div>
 		</c:forEach>
-		<button type="submit">예매</button>
+		<br>
+		<button type="submit" class="btn btn-outline-primary" >예매</button>
 	</form>
+	</div>
 </body>
 </html>

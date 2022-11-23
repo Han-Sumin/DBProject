@@ -75,5 +75,10 @@
 		from SCHEDULE where TRAIN_ID = #{TRAIN_ID} and DIRECTION = #{DIRECTION}
 		and STATION_ID = #{STATION_ID}
 	</select>
+	<update id="updateprice">
+	update RESERVED_STATUS set PRICE =
+		#{PRICE} where RESERVE_ID =
+		#{RESERVE_ID}
+	</update>
 
 </mapper>
