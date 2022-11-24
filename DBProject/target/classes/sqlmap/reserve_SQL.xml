@@ -33,7 +33,7 @@
 
 	<select id="insertseat" parameterType="hashMap">
 		insert into RESERVED_SEAT
-		values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION},#{TIME},#{TRAIN_NUM},#{SEAT_NUM},#{RESERVE_ID})
+		values(#{STATION_ID},#{TRAIN_ID},#{DIRECTION},#{TIME},SYSDATE,#{TRAIN_NUM},#{SEAT_NUM},#{RESERVE_ID})
 	</select>
 
 	<select id="pay" parameterType="hashMap" resultType="hashMap">
