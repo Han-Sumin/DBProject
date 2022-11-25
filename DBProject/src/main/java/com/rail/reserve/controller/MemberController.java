@@ -77,8 +77,8 @@ public class MemberController {
 			if (member_id.equals("admin")) {
 				mav.setViewName("redirect:/admin");
 			} else {
-				if (state.equals("¹Ì½ÂÀÎ")) {
-					mav.addObject("msg","½ÂÀÎµÇÁö ¾ÊÀº È¸¿ø");
+				if (state.equals("ë¯¸ìŠ¹ì¸")) {
+					mav.addObject("msg","ìŠ¹ì¸ë˜ì§€ ì•Šì€ íšŒì›");
 					mav.setViewName("redirect:/");
 				} else {
 					mav.setViewName("redirect:/reserve?MEMBER_ID=" + member_id);

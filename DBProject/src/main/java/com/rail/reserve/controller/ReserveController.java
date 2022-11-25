@@ -115,7 +115,6 @@ public class ReserveController {
 				String TIME = service.timeget(vo);
 				vo.setTIME(TIME);
 				int count = service.count(vo);
-				System.out.println(count);
 				if (count == 0) {
 					service.insertseat(vo);
 					mav.setViewName(
