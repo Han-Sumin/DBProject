@@ -54,7 +54,7 @@
 		select
 		count(*) from RESERVED_SEAT where STATION_ID = #{STATION_ID} and
 		TRAIN_ID = #{TRAIN_ID} and DIRECTION = #{DIRECTION} and TRAIN_NUM =
-		#{TRAIN_NUM} and SEAT_NUM = #{SEAT_NUM} and TIME = #{TIME}
+		#{TRAIN_NUM} and SEAT_NUM = #{SEAT_NUM} and TIME = #{TIME} and RUN_DATE = SYSDATE
 	</select>
 
 	<delete id="delete">
